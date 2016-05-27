@@ -5,6 +5,7 @@
  */
 package Server;
 
+import Server.business.FileAttente;
 import Server.business.Thread;
 
 import java.io.IOException;
@@ -19,10 +20,18 @@ import java.util.logging.Logger;
  */
 public class Main {
     
-    
+            public static FileAttente file1 = new FileAttente(1);
+            public static FileAttente file2 = new FileAttente(2);
+            public static FileAttente file3 = new FileAttente(3);
+            public static FileAttente file4 = new FileAttente(4);
     
          public static void main(String[] args){
    
+             
+             
+            
+             
+             
              
              
              

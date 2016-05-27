@@ -31,28 +31,36 @@ public class Thread implements Runnable {
         this.socket = socket;
         
     }
-    
-    
 
-    
-    
-    
-    
-    
     
     @Override
     public void run() {
         
         
         
-        System.out.println("testrun");
-        
-            Socket socketClient = new Socket();
+        System.out.println("Lancement thread principal");
             
-            ThreadClient threadClient = new ThreadClient(socketClient);
-            threadClient.run();
+                 
+            while(true){
+                     
+                    
+                     
+                     ThreadClient threadEcoute;
+            try {
+                threadEcoute = new ThreadClient(this.serverSocket.accept());
+                 threadEcoute.run();
+            } catch (IOException ex) {
+                Logger.getLogger(Thread.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+                 
+                 //Thread thread2 = new Thread(serverSocket);
+                //Thread thread3 = new Thread(serverSocket);
+                 //Thread thread4 = new Thread(serverSocket);
+                 
+            }
+                 
             
-        
         
         
         

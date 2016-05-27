@@ -42,12 +42,14 @@ public class Voiture {
     }
 
     
-    
-    
     //Constructeur plein
     
     public Voiture(int id, String plaqueImmatriculation) {
         this.id = id;
+        this.plaqueImmatriculation = plaqueImmatriculation;
+    }
+
+    public Voiture(String plaqueImmatriculation) {
         this.plaqueImmatriculation = plaqueImmatriculation;
     }
     

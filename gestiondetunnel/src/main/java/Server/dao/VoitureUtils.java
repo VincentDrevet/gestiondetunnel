@@ -5,10 +5,32 @@
  */
 package Server.dao;
 
+import Server.business.Voiture;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author vauban
  */
 public class VoitureUtils {
+    
+    /**
+     *
+     * @return
+     */
+    public static Map getAllVoitures(){
+        
+        Map<String, Voiture> allVoitures;
+        allVoitures = new HashMap<>();
+        return allVoitures;
+        
+        
+        
+        
+        
+    }
+    
+    
     
 }

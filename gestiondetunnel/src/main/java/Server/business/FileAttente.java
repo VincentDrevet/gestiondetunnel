@@ -5,6 +5,8 @@
  */
 package Server.business;
 
+import java.util.Map;
+
 /**
  *
  * @author vauban
@@ -14,6 +16,15 @@ public class FileAttente {
     
     
     private int id;
+    private Map<String, Voiture> voitureDansLaFile;
+
+    public void setVoitureDansLaFile(Map<String, Voiture> voitureDansLaFile) {
+        this.voitureDansLaFile = voitureDansLaFile;
+    }
+
+    public Map<String, Voiture> getVoitureDansLaFile() {
+        return voitureDansLaFile;
+    }
 
     public int getId() {
         return id;
@@ -30,7 +41,10 @@ public class FileAttente {
         this.id = id;
     }
     
-    
+    public int getNombreVoiture()
+    {
+        return this.voitureDansLaFile.size();
+    }
     
     
     
