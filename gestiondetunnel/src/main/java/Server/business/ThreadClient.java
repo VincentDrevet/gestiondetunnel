@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author vauban
  */
-public class ThreadClient implements Runnable{
+public class ThreadClient extends Thread {
     
     
      private ServerSocket serverSocket;
@@ -33,15 +33,16 @@ public class ThreadClient implements Runnable{
     
     
     public ThreadClient(Socket socket) {
-        
-        
-        
-        
+
         this.socket = socket;
-        
+      
     }
     
-    
+//    public void start(){
+//        System.out.println("debut start");
+//        this.run();
+//        System.out.println("Fin start");
+//    }
        @Override
     public void run() {
     
@@ -55,11 +56,16 @@ public class ThreadClient implements Runnable{
              dos.writeUTF("Bonjour merci de saisir votre immatriculation");
              
              String immatriculation = buffer.readLine();
+             
              Voiture nouvelleVoiture = FactoryVoiture.creeVoiture(immatriculation);
              
              
              FileAttenteUtils.ajouterVoiture(nouvelleVoiture);
-      
+             
+             dos.writeUTF("Votre immatriculation est : "+nouvelleVoiture.getPlaqueImmatriculation() + "Merci d'attendre votre tour ...");
+             
+             System.out.println("enregistrement plaque");
+       
              
              
          } catch (IOException ex) {

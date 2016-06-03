@@ -5,6 +5,7 @@
  */
 package Server.business;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,14 +17,14 @@ public class FileAttente {
     
     
     private int id;
-    private Map<String, Voiture> voitureDansLaFile;
+    private Map<Integer, Voiture> voituresDansLaFile;
 
-    public void setVoitureDansLaFile(Map<String, Voiture> voitureDansLaFile) {
-        this.voitureDansLaFile = voitureDansLaFile;
+    public void setVoituresDansLaFile(Map<Integer, Voiture> voitureDansLaFile) {
+        this.voituresDansLaFile = voitureDansLaFile;
     }
 
-    public Map<String, Voiture> getVoitureDansLaFile() {
-        return voitureDansLaFile;
+    public Map<Integer, Voiture> getVoituresDansLaFile() {
+        return voituresDansLaFile;
     }
 
     public int getId() {
@@ -39,11 +40,13 @@ public class FileAttente {
     
     public FileAttente(int id) {
         this.id = id;
+        this.voituresDansLaFile = new HashMap<>();
     }
     
     public int getNombreVoiture()
     {
-        return this.voitureDansLaFile.size();
+        System.out.println(this.voituresDansLaFile);
+        return this.voituresDansLaFile.size();
     }
     
     

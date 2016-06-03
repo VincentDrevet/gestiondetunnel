@@ -14,7 +14,15 @@ public class Voiture {
     private int id;
     private String plaqueImmatriculation;
 
-    
+    public static int idMax;
+
+    public static int getIdMax() {
+        return idMax;
+    }
+
+    public static void setIdMax(int idMax) {
+        Voiture.idMax = idMax;
+    }
     
     
     
@@ -44,13 +52,15 @@ public class Voiture {
     
     //Constructeur plein
     
-    public Voiture(int id, String plaqueImmatriculation) {
-        this.id = id;
-        this.plaqueImmatriculation = plaqueImmatriculation;
-    }
+//    public Voiture(int id, String plaqueImmatriculation) {
+//        this.id = id;
+//        this.plaqueImmatriculation = plaqueImmatriculation;
+//    }
 
     public Voiture(String plaqueImmatriculation) {
         this.plaqueImmatriculation = plaqueImmatriculation;
+        this.id= idMax;
+        idMax++;
     }
     
     

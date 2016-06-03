@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author vauban
  */
-public class Thread implements Runnable {
+public class ThreadPrincipal implements Runnable {
 
     private ServerSocket serverSocket;
     private Socket socket;
@@ -26,7 +26,7 @@ public class Thread implements Runnable {
     
     
     
-    public Thread(ServerSocket serverSocket, Socket socket) {
+    public ThreadPrincipal(ServerSocket serverSocket, Socket socket) {
         this.serverSocket = serverSocket;
         this.socket = socket;
         
@@ -40,7 +40,15 @@ public class Thread implements Runnable {
         
         System.out.println("Lancement thread principal");
             
-                 
+//         ThreadFileAttente threadFileAttente;
+//         try {
+//                threadFileAttente = new ThreadFileAttente(this.serverSocket.accept());
+//                 threadFileAttente.run();
+//            } catch (IOException ex) {
+//                Logger.getLogger(Thread.class.getName()).log(Level.SEVERE, null, ex);
+//            }     
+        
+        
             while(true){
                      
                     
@@ -50,9 +58,12 @@ public class Thread implements Runnable {
                 threadEcoute = new ThreadClient(this.serverSocket.accept());
                  threadEcoute.run();
             } catch (IOException ex) {
-                Logger.getLogger(Thread.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ThreadPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            
+            
+            System.out.println("test");
                  
                  //Thread thread2 = new Thread(serverSocket);
                 //Thread thread3 = new Thread(serverSocket);
