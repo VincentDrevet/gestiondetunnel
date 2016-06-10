@@ -19,63 +19,42 @@ public class FileAttenteUtils {
     
     
     
-    public static void ajouterVoiture(Voiture nouvelleVoiture){
+    public static FileAttente ajouterVoiture(Voiture nouvelleVoiture){
         
-        FileAttente bonneFile;
+        FileAttente bonneFile = fileAttenteGrande();
         
-        if(Main.file1.getNombreVoiture()>Main.file2.getNombreVoiture())
-        {
-           bonneFile = Main.file2;
-        }
-        else
-        {
-            bonneFile = Main.file1;
-        }
-        if(bonneFile.getNombreVoiture()>Main.file3.getNombreVoiture())
-        {
-            bonneFile = Main.file3;
-        }
-        if(bonneFile.getNombreVoiture()>Main.file4.getNombreVoiture())
-        {
-            bonneFile = Main.file4;
-        }
         
         Map<Integer, Voiture> nouvelleFile;
         nouvelleFile = bonneFile.getVoituresDansLaFile();
         nouvelleFile.put(nouvelleVoiture.getId(), nouvelleVoiture);
         bonneFile.setVoituresDansLaFile(nouvelleFile);
-        
+        System.out.println(bonneFile.getNombreVoiture()+" voiture dans la file "+bonneFile.getId());
+        return bonneFile;
     }
     
     public static FileAttente fileAttenteGrande(){
         
-        FileAttente bonneFile;
-        
-        if(Main.file1.getNombreVoiture()>Main.file2.getNombreVoiture())
+        FileAttente bonneFile = (FileAttente) Main.allListAttente.get(0);
+        for(Object fileAttente : Main.allListAttente.values())
         {
-           bonneFile = Main.file1;
-        }
-        else
-        {
-            bonneFile = Main.file2;
-        }
-        if(bonneFile.getNombreVoiture()<Main.file3.getNombreVoiture())
-        {
-            bonneFile = Main.file3;
-        }
-        if(bonneFile.getNombreVoiture()<Main.file4.getNombreVoiture())
-        {
-            bonneFile = Main.file4;
-        }
-        
+            int i = bonneFile.getNombreVoiture();
+//            FileAttente laFile = (FileAttente) fileAttente;
+            if(((FileAttente) fileAttente).getNombreVoiture()>bonneFile.getNombreVoiture())
+            {
+                bonneFile = (FileAttente) fileAttente;
+            }
+        }        
         return bonneFile;
         
     }
     
-    public static void supprimerPremiereVoiture(FileAttente fileAttenteAReduire){
+    public static int supprimerPremiereVoiture(FileAttente fileAttenteAReduire){
         Map<Integer,Voiture> nouvelleFile = fileAttenteAReduire.getVoituresDansLaFile();
-        nouvelleFile.remove(FileAttenteUtils.premierVoiture(fileAttenteAReduire));
+        Voiture voitureASupprimer = FileAttenteUtils.premierVoiture(fileAttenteAReduire);
+        int idVoitureSupprimer = voitureASupprimer.getId();
+        nouvelleFile.remove(idVoitureSupprimer);
         fileAttenteAReduire.setVoituresDansLaFile(nouvelleFile);
+        return idVoitureSupprimer;
     }
     public static Voiture premierVoiture(FileAttente fileAttente)
     {
@@ -88,6 +67,7 @@ public class FileAttenteUtils {
             {
                 test = true;
                 premiereVoiture = fileAttente.getVoituresDansLaFile().get(i);
+                System.out.println(premiereVoiture);
             }
             else
             {
@@ -95,6 +75,7 @@ public class FileAttenteUtils {
             }
             if(i == 99)
             {
+                System.out.println("Pas trouver de premier voiture");
                 test = true;
             }
         }

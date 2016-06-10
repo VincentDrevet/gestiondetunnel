@@ -42,14 +42,14 @@ public class ThreadFileAttente extends Thread {
     }
       @Override
     public void run() {
-       while(true)
-       {
+
+           System.out.println("La file d'attente démarre");
            Timer timer = new Timer();
            TacheTimer timerDesTache = new TacheTimer();
+           timer.schedule(timerDesTache,0,30000);
 
            
-           
-       }
+        
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package Server.business;
 
+import static Server.Main.allThread;
 import Server.dao.FactoryVoiture;
 import Server.dao.FileAttenteUtils;
 import Server.dao.VoitureUtils;
@@ -28,9 +29,18 @@ public class ThreadClient extends Thread {
     
      private ServerSocket serverSocket;
     private Socket socket;
+    private int idThread;
+
+    public int getIdThread() {
+        return idThread;
+    }
+
+    public void setIdThread(int idThread) {
+        this.idThread = idThread;
+    }
 
     
-    
+   
     
     public ThreadClient(Socket socket) {
 
@@ -43,6 +53,22 @@ public class ThreadClient extends Thread {
 //        this.run();
 //        System.out.println("Fin start");
 //    }
+    public void passage() throws InterruptedException 
+    {
+        
+        DataOutputStream dos;
+         try {
+             dos = new DataOutputStream(this.socket.getOutputStream());
+             dos.writeUTF("C'est à votre tour, vous entrer dans le tunnel");
+            this.sleep(15000);
+            dos.writeUTF("Vous sortez du tunnel, Bonne Journée");
+            
+         } catch (IOException ex) {
+             Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        
+    }
        @Override
     public void run() {
     
@@ -54,19 +80,21 @@ public class ThreadClient extends Thread {
              //Creation d'un flux binaire
              DataOutputStream dos = new DataOutputStream(this.socket.getOutputStream());
              dos.writeUTF("Bonjour merci de saisir votre immatriculation");
-             
+             dos.flush();
              String immatriculation = buffer.readLine();
              
              Voiture nouvelleVoiture = FactoryVoiture.creeVoiture(immatriculation);
              
              
-             FileAttenteUtils.ajouterVoiture(nouvelleVoiture);
+             FileAttente fileAttenteChoisis;
+            fileAttenteChoisis = FileAttenteUtils.ajouterVoiture(nouvelleVoiture);
              
-             dos.writeUTF("Votre immatriculation est : "+nouvelleVoiture.getPlaqueImmatriculation() + "Merci d'attendre votre tour ...");
-             
+             dos.writeUTF("Votre immatriculation est : "+nouvelleVoiture.getPlaqueImmatriculation() + "Et votre place dans votre file est : "+fileAttenteChoisis.getNombreVoiture()+". Merci d'attendre votre tour ...");
+             dos.flush();
              System.out.println("enregistrement plaque");
        
-             
+                this.setIdThread(nouvelleVoiture.getId());
+             allThread.put(this.getIdThread(), this);
              
          } catch (IOException ex) {
              Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
