@@ -19,7 +19,16 @@ public class Historique {
     private Date dateEntreeTunnel;
     private Date dateArriveFile;
     private int etatEnCours;
+    private Voiture voiture;
 
+    public Voiture getVoiture() {
+        return voiture;
+    }
+
+    public void setVoiture(Voiture voiture) {
+        this.voiture = voiture;
+    }
+    
     public Date getDateConnexion() {
         return dateConnexion;
     }
@@ -62,14 +71,21 @@ public class Historique {
     
     
     
-    
-
+    public Historique()
+    {
+        
+    }
     public Historique(int id, Date dateConnexion, Date dateEntreeTunnel, Date dateArriveFile, int etatEnCours) {
         this.id = id;
         this.dateConnexion = dateConnexion;
         this.dateEntreeTunnel = dateEntreeTunnel;
         this.dateArriveFile = dateArriveFile;
         this.etatEnCours = etatEnCours;
+    }
+
+    @Override
+    public String toString() {
+        return "Historique{" + "id=" + id + ", dateConnexion=" + dateConnexion + ", dateEntreeTunnel=" + dateEntreeTunnel + ", dateArriveFile=" + dateArriveFile + ", etatEnCours=" + etatEnCours + ", voiture=" + voiture + '}';
     }
     
     

@@ -45,8 +45,10 @@ public class ThreadFileAttente extends Thread {
 
            System.out.println("La file d'attente démarre");
            Timer timer = new Timer();
+//           Timer timer2 = new Timer();
            TacheTimer timerDesTache = new TacheTimer();
            timer.schedule(timerDesTache,0,30000);
+//           timer.schedule(timerDesTache,30000,30000);
 
            
         

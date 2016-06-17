@@ -35,6 +35,7 @@ public class TacheTimer extends TimerTask{
         {
             int idVoitureSupprimer;
             idVoitureSupprimer = FileAttenteUtils.supprimerPremiereVoiture(fileAReduire);
+            
             ThreadClient threadDuClient = (ThreadClient) allThread.get(idVoitureSupprimer);
             try {
                 threadDuClient.passage();

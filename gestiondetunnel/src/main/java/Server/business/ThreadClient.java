@@ -5,11 +5,14 @@
  */
 package Server.business;
 
+import Server.Main;
 import static Server.Main.allThread;
 import Server.dao.FactoryVoiture;
 import Server.dao.FileAttenteUtils;
+import Server.dao.HistoriqueUtils;
 import Server.dao.VoitureUtils;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -47,12 +50,6 @@ public class ThreadClient extends Thread {
         this.socket = socket;
       
     }
-    
-//    public void start(){
-//        System.out.println("debut start");
-//        this.run();
-//        System.out.println("Fin start");
-//    }
     public void passage() throws InterruptedException 
     {
         
@@ -60,9 +57,11 @@ public class ThreadClient extends Thread {
          try {
              dos = new DataOutputStream(this.socket.getOutputStream());
              dos.writeUTF("C'est à votre tour, vous entrer dans le tunnel");
-            this.sleep(15000);
-            dos.writeUTF("Vous sortez du tunnel, Bonne Journée");
-            
+             HistoriqueUtils.getHistorique(idThread).setDateEntreeTunnel(new java.util.Date());
+             HistoriqueUtils.getHistorique(idThread).setEtatEnCours(3);
+//            this.sleep(45000);
+//            dos.writeUTF("Vous sortez du tunnel, Bonne Journée");
+//            this.socket.close();
          } catch (IOException ex) {
              Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -75,21 +74,35 @@ public class ThreadClient extends Thread {
         System.out.println("nouveau client");
         
          try {
-             BufferedReader buffer = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-    
+             
+//          
+//             BufferedReader buffer = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+              
+            DataInputStream dis = new DataInputStream(this.socket.getInputStream());
              //Creation d'un flux binaire
              DataOutputStream dos = new DataOutputStream(this.socket.getOutputStream());
              dos.writeUTF("Bonjour merci de saisir votre immatriculation");
              dos.flush();
-             String immatriculation = buffer.readLine();
+             // Création de l'historique
+             Historique nouvelleHistorique = new Historique();
+             nouvelleHistorique.setDateConnexion(new java.util.Date());
+             nouvelleHistorique.setEtatEnCours(1);
              
+             // Demande de l'immatriculation
+             String immatriculation = dis.readUTF();
              Voiture nouvelleVoiture = FactoryVoiture.creeVoiture(immatriculation);
-             
+             // Modif de l'historique
+             nouvelleHistorique.setDateArriveFile(new java.util.Date());
+             nouvelleHistorique.setVoiture(nouvelleVoiture);
+             nouvelleHistorique.setId(nouvelleVoiture.getId());
+             nouvelleHistorique.setEtatEnCours(2);
+             // Stokage de l'historique
+             Main.allHistorique.put(nouvelleHistorique.getId(), nouvelleHistorique);
              
              FileAttente fileAttenteChoisis;
             fileAttenteChoisis = FileAttenteUtils.ajouterVoiture(nouvelleVoiture);
              
-             dos.writeUTF("Votre immatriculation est : "+nouvelleVoiture.getPlaqueImmatriculation() + "Et votre place dans votre file est : "+fileAttenteChoisis.getNombreVoiture()+". Merci d'attendre votre tour ...");
+             dos.writeUTF(" Votre immatriculation est : "+nouvelleVoiture.getPlaqueImmatriculation() + "Vous êtes dans la file : "+fileAttenteChoisis.getId()+" et votre place dans la file est : "+fileAttenteChoisis.getNombreVoiture()+". Merci d'attendre votre tour ...");
              dos.flush();
              System.out.println("enregistrement plaque");
        

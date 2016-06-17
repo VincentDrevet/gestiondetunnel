@@ -39,16 +39,7 @@ public class ThreadPrincipal implements Runnable {
         
         
         System.out.println("Lancement thread principal");
-            
-//         ThreadFileAttente threadFileAttente;
-//         try {
-//                threadFileAttente = new ThreadFileAttente(this.serverSocket.accept());
-//                 threadFileAttente.run();
-//            } catch (IOException ex) {
-//                Logger.getLogger(Thread.class.getName()).log(Level.SEVERE, null, ex);
-//            }     
-        
-        
+          
             while(true){
                      
                     
@@ -62,12 +53,6 @@ public class ThreadPrincipal implements Runnable {
             }
 
             
-            
-            System.out.println("test");
-                 
-                 //Thread thread2 = new Thread(serverSocket);
-                //Thread thread3 = new Thread(serverSocket);
-                 //Thread thread4 = new Thread(serverSocket);
                  
             }
                  

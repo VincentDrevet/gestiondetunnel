@@ -21,15 +21,31 @@ public class FileAttenteUtils {
     
     public static FileAttente ajouterVoiture(Voiture nouvelleVoiture){
         
-        FileAttente bonneFile = fileAttenteGrande();
+        FileAttente bonneFile = fileAttentePetite();
         
         
         Map<Integer, Voiture> nouvelleFile;
         nouvelleFile = bonneFile.getVoituresDansLaFile();
         nouvelleFile.put(nouvelleVoiture.getId(), nouvelleVoiture);
         bonneFile.setVoituresDansLaFile(nouvelleFile);
-        System.out.println(bonneFile.getNombreVoiture()+" voiture dans la file "+bonneFile.getId());
         return bonneFile;
+    }
+    
+     public static FileAttente fileAttentePetite(){
+        
+        FileAttente bonneFile = (FileAttente) Main.allListAttente.get(0);
+        for(Object fileAttente : Main.allListAttente.values())
+        {
+             FileAttente laFile = (FileAttente) fileAttente;
+            int i = bonneFile.getNombreVoiture();
+           
+            if(((FileAttente) fileAttente).getNombreVoiture()<bonneFile.getNombreVoiture())
+            {
+                bonneFile = (FileAttente) fileAttente;
+            }
+        }        
+        return bonneFile;
+        
     }
     
     public static FileAttente fileAttenteGrande(){
@@ -37,8 +53,9 @@ public class FileAttenteUtils {
         FileAttente bonneFile = (FileAttente) Main.allListAttente.get(0);
         for(Object fileAttente : Main.allListAttente.values())
         {
+             FileAttente laFile = (FileAttente) fileAttente;
             int i = bonneFile.getNombreVoiture();
-//            FileAttente laFile = (FileAttente) fileAttente;
+           
             if(((FileAttente) fileAttente).getNombreVoiture()>bonneFile.getNombreVoiture())
             {
                 bonneFile = (FileAttente) fileAttente;
@@ -67,7 +84,6 @@ public class FileAttenteUtils {
             {
                 test = true;
                 premiereVoiture = fileAttente.getVoituresDansLaFile().get(i);
-                System.out.println(premiereVoiture);
             }
             else
             {

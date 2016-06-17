@@ -5,10 +5,18 @@
  */
 package Server.dao;
 
+import Server.Main;
+import Server.business.Historique;
+
 /**
  *
  * @author vauban
  */
 public class HistoriqueUtils {
+    
+    public static Historique getHistorique(int idVoiture)
+    {
+        return (Historique) Main.allHistorique.get(idVoiture);
+    }
     
 }
