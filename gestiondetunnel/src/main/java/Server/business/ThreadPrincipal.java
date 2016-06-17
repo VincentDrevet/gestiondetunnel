@@ -40,6 +40,7 @@ public class ThreadPrincipal implements Runnable {
         
         System.out.println("Lancement thread principal");
           
+        //ecoute des communications pouvant provenir des clients
             while(true){
                      
                     

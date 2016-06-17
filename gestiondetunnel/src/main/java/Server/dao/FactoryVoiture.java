@@ -13,6 +13,8 @@ import Server.business.Voiture;
  */
 public class FactoryVoiture {
     
+    
+    //factory de voiture
     public static Voiture creeVoiture(String immatriculation)
     {
         Voiture nouvelleVoiture = new Voiture(immatriculation);

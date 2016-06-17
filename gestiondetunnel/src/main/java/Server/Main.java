@@ -34,24 +34,33 @@ public class Main {
             public static void main(String[] args){
    
             
+                
+                //demande de saisie nombre files
             Voiture.idMax = 0;
             System.out.println("Merci de saisir le nombre de files à activer");
             Scanner entree = new Scanner(System.in);
             int nombreFile = entree.nextInt();
             
+            
+            //Creation des files + enregistrement dans une hashmaps
             for(int i = 0; i<nombreFile;i++)
             {
                 FileAttente nvFile = new FileAttente(i);
                 allListAttente.put(nvFile.getId(), nvFile);
             }
+            
+            //affectation d'un socket au thread "Fileattente" et demarrage
             Socket socketFileAttente = new Socket();
             ThreadFileAttente threadFileAttente;
             threadFileAttente = new ThreadFileAttente(socketFileAttente);
             threadFileAttente.start(); 
+            
+            //creation du thread administration
             ThreadAdmin threadAdmin;
             threadAdmin = new ThreadAdmin();
             threadAdmin.start();
             
+            //initialisation du socket principal
              ServerSocket serverSocket;
              try {
                  
@@ -72,7 +81,7 @@ public class Main {
                     
                      
                      
-                 
+                 //erreur
              } catch (IOException ex) {
                  Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
              }

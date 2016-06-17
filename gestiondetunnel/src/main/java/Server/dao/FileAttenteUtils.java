@@ -18,7 +18,7 @@ import java.util.Set;
 public class FileAttenteUtils {
     
     
-    
+    //ajout d'une voiture à la files la plus petite
     public static FileAttente ajouterVoiture(Voiture nouvelleVoiture){
         
         FileAttente bonneFile = fileAttentePetite();
@@ -31,6 +31,7 @@ public class FileAttenteUtils {
         return bonneFile;
     }
     
+    //détermination de la file la plus petite
      public static FileAttente fileAttentePetite(){
         
         FileAttente bonneFile = (FileAttente) Main.allListAttente.get(0);
@@ -48,6 +49,7 @@ public class FileAttenteUtils {
         
     }
     
+     //determination de la file la plus grande
     public static FileAttente fileAttenteGrande(){
         
         FileAttente bonneFile = (FileAttente) Main.allListAttente.get(0);
@@ -65,6 +67,7 @@ public class FileAttenteUtils {
         
     }
     
+    //suppression d'une voiture d'une file
     public static int supprimerPremiereVoiture(FileAttente fileAttenteAReduire){
         Map<Integer,Voiture> nouvelleFile = fileAttenteAReduire.getVoituresDansLaFile();
         Voiture voitureASupprimer = FileAttenteUtils.premierVoiture(fileAttenteAReduire);
@@ -73,6 +76,8 @@ public class FileAttenteUtils {
         fileAttenteAReduire.setVoituresDansLaFile(nouvelleFile);
         return idVoitureSupprimer;
     }
+    
+    //fonction qui retourne la premier voiture de la file
     public static Voiture premierVoiture(FileAttente fileAttente)
     {
         Voiture premiereVoiture = null;

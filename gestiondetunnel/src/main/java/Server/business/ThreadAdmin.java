@@ -20,6 +20,8 @@ public class ThreadAdmin extends Thread{
     
     public void run()
     {
+        
+        //Creation d'une boucle infini pour l'administration du serveur
         System.out.println("Admin lancer");
         Boolean deconnection = false;
         while(!deconnection)
@@ -27,12 +29,17 @@ public class ThreadAdmin extends Thread{
             System.out.println("Que souhaitez vous faire?");
             Scanner entree = new Scanner(System.in);
             String commande = entree.nextLine();
+            
+            //les différentes commande disponible pour l'administration du serveur
              if(commande.equalsIgnoreCase("Sauvegarder Historique"))
              {
                  System.out.println("Sauvegarde en cours");
+                 //recuperation date d'execution
                  Date date = new java.util.Date();
+                 //definition fichier
                  File f = new File ("historique"+date.getTime()+".csv");
- 
+                    
+                //ecriture de l'historique des evenements dans un fichier + formatage au format csv
                 try
                 {
                     FileWriter fw = new FileWriter (f);

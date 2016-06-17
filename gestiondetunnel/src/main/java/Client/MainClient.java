@@ -16,6 +16,8 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -42,12 +44,38 @@ public class MainClient {
         try {
             socket = new Socket(InetAddress.getByName(Ip),port);
             
-            
+            //reception donnée serveur
             DataInputStream dis = new DataInputStream(socket.getInputStream());
             System.out.println(dis.readUTF());
             Scanner entree2 = new Scanner(System.in);
-            String immatriculation = entree2.nextLine();
+            boolean regexok= false;
+            String immatriculation = "";
+            //REGEX de verification plaque immatriculation
+            while(!regexok)
+            {
+                immatriculation = entree2.nextLine();
+                Pattern pattern = Pattern.compile("^[a-zA-Z]{2}-[0-9]{1,3}-[a-zA-Z]{2}$");
+                Matcher matcher = pattern.matcher(immatriculation);
+                if(matcher.matches())
+                {
+                    regexok = true;
+                }
+                if(!regexok)
+                {
+                    pattern = Pattern.compile("^[0-9]{1,4}-[a-zA-Z]{2}-[0-9]{2}$");
+                    matcher = pattern.matcher(immatriculation);
+                    if(matcher.matches())
+                    {
+                        regexok = true;
+                    }
+                    if(!regexok)
+                    {
+                        System.out.println("Erreur sur votre plaque d'immatriculation, merci de recommencer.");
+                    }
+                }
+            }
             
+            //envoi donnée au serveur
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
                         
             dos.writeUTF(immatriculation);

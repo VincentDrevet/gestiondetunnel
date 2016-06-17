@@ -19,6 +19,8 @@ public class VoitureUtils {
      *
      * @return
      */
+    
+    //fonction retournant toute les voitures présentes dans la collection
     public static Map getAllVoitures(){
         
         Map<String, Voiture> allVoitures;

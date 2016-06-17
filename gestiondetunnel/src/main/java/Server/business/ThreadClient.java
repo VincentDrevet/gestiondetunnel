@@ -52,7 +52,7 @@ public class ThreadClient extends Thread {
     }
     public void passage() throws InterruptedException 
     {
-        
+        //envoi de donnée au client
         DataOutputStream dos;
          try {
              dos = new DataOutputStream(this.socket.getOutputStream());

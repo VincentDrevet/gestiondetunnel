@@ -14,6 +14,7 @@ import Server.business.Historique;
  */
 public class HistoriqueUtils {
     
+    //fonction retournant la totalité de l'historique
     public static Historique getHistorique(int idVoiture)
     {
         return (Historique) Main.allHistorique.get(idVoiture);

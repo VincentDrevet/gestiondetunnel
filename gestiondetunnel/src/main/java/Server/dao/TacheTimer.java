@@ -25,11 +25,12 @@ public class TacheTimer extends TimerTask{
 
     
     
-    
+   
     
     @Override
     public void run(){
         
+        //action du timer de supprimer une voiture d'une file
         FileAttente fileAReduire = FileAttenteUtils.fileAttenteGrande();
         if(fileAReduire.getNombreVoiture()>0)
         {

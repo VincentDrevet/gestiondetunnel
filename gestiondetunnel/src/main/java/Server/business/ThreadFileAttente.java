@@ -43,6 +43,7 @@ public class ThreadFileAttente extends Thread {
       @Override
     public void run() {
 
+        //Initialisation d'un timer
            System.out.println("La file d'attente démarre");
            Timer timer = new Timer();
 //           Timer timer2 = new Timer();
